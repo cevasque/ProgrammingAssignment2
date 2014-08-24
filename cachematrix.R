@@ -1,14 +1,17 @@
-## A matrix is created that is stored in the cache, when the inversion of the matrix is not calculated it calculates it and returns it.
+## A matrix is created that is stored in the cache, when the inversion of the matrix was not calculated previously it calculates it and returns it.
 
 ## This function creates a special "matrix" object that can cache its inverse.
+
 makeCacheMatrix <- function(x = matrix()) {
-        m <- NULL #m will store the matrix 
+        
+	m <- NULL 		# m will store the matrix 
         set <- function(y) {
                 x <<- y
                 m <<- NULL
         }
-        get <- function() x # this function returns the value of the original matrix
-        setinversion <- function(inversion) m <<- inversion
+        get <- function() x 	# this function returns the value of the original matrix
+        
+	setinversion <- function(inversion) m <<- inversion
         getinversion <- function() m
         list(set = set, get = get,
              setinversion = setinversion,
@@ -23,13 +26,13 @@ cacheSolve <- function(x, ...) {
 
 	m<-x$getinversion()
 
-	if(!is.null(m)){
+	if(!is.null(m)){				# if loop to check if the inverse was already 							# calculated, returning a message if it is.
 
-		message("getting cached data")
+		message("getting cached data")		
 		return (m)
 	}
 	data<-x$get()
-	m<-solve(data,...)
+	m<-solve(data,...)	#the inverse of the matrix is calculated
 	m
 
 }
